@@ -4,6 +4,7 @@ package wedos
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/libdns/libdns"
@@ -70,8 +71,13 @@ func (p *Provider) GetRecords(ctx context.Context, zone string) ([]libdns.Record
 func (p *Provider) AppendRecords(ctx context.Context, zone string, records []libdns.Record) ([]libdns.Record, error) {
 	var addedRecords []libdns.Record
 
+	fmt.Println("APPENDING RECORDS")
+	fmt.Println(zone)
+	fmt.Println(records)
+
 	for _, record := range records {
 		payload, err := toWedosDNSRecord(record, zone)
+		fmt.Println(payload)
 		if err != nil {
 			return nil, err
 		}
@@ -97,6 +103,7 @@ func (p *Provider) AppendRecords(ctx context.Context, zone string, records []lib
 		}
 	}
 
+	fmt.Println("ADDED RECORDS")
 	return addedRecords, nil
 }
 
@@ -106,6 +113,10 @@ func (p *Provider) SetRecords(ctx context.Context, zone string, records []libdns
 	payload := map[string]string{
 		"domain": zone,
 	}
+
+	fmt.Println("SETTING RECORDS")
+	fmt.Println(zone)
+	fmt.Println(records)
 
 	request, err := p.buildRequest(ctx, GetRecords, "GetRecords", payload)
 	if err != nil {
@@ -147,6 +158,7 @@ func (p *Provider) SetRecords(ctx context.Context, zone string, records []libdns
 		_, ok := remoteMap[recordToSetKey]
 		if !ok {
 			payload := wedosRecordToSet
+			fmt.Println(payload)
 			request, err := p.buildRequest(ctx, AppendRecords, "AppendRecords", payload)
 			if err != nil {
 				return nil, err
@@ -196,6 +208,7 @@ func (p *Provider) SetRecords(ctx context.Context, zone string, records []libdns
 		}
 	}
 
+	fmt.Println("UPDATED RECORDS")
 	return updatedRecords, nil
 }
 
