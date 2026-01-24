@@ -1,4 +1,4 @@
-// Package libdnstemplate implements a DNS record management client compatible
+// Package wedos implements a DNS record management client compatible
 // with the libdns interfaces for WEDOS DNS.
 package wedos
 
