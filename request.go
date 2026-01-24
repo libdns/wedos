@@ -82,7 +82,7 @@ func (p *Provider) buildRequest(ctx context.Context, command string, clTRID stri
 	}
 
 	requestWrapped := map[string]string{
-		"req": string(requestJSON),
+		"request": string(requestJSON),
 	}
 
 	form := url.Values{}
