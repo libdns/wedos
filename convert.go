@@ -143,6 +143,7 @@ func toLibDNSRecord(row rowItem) (libdns.Record, error) {
 
 // toWedosDNSRecord converts a libdns.Record to a JSON format represented by a map for the WEDOS API
 func toWedosDNSRecord(record libdns.Record, zone string) (map[string]string, error) {
+	zone = strings.TrimSuffix(zone, ".")
 	name, err := normalizeNameToAPI(record.RR().Name)
 	if err != nil {
 		return nil, fmt.Errorf("toWedosDNSRecord: failed to normalize name: %v", err)
