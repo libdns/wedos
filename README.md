@@ -8,7 +8,11 @@ allowing you to manage DNS records.
 
 # Authentication
 WEDOS API (WAPI) doesn't use API keys, but rather login username and password (precisely their SHA-1 hash). To get started,
-please see the official instructions [here](https://kb.wedos.global/wapi-manual/#activate).
+please see the official instructions [here](https://kb.wedos.global/wapi-manual/#activate). Please note that your WAPI password
+is different from your Wedos account password.
+
+When your WAPI account is ready, put your username (email) in the `Username` field and your WAPI password in the `Password` field.
+You can also use enviromental variables instaed of hardcoding your credentials.
 
 # Usage
 ```go
@@ -35,3 +39,7 @@ func main() {
 
 	fmt.Printf("%#v", records)
 }
+```
+
+# Known limitations
+- WEDOS allows `TTL` values from `300` to `172800`. Setting your records with `TTL=0` will fail.
