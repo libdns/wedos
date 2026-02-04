@@ -73,7 +73,6 @@ func (p *Provider) AppendRecords(ctx context.Context, zone string, records []lib
 
 	for _, record := range records {
 		payload, err := toWedosDNSRecord(record, zone)
-		fmt.Println(payload)
 		if err != nil {
 			return nil, err
 		}
@@ -149,7 +148,6 @@ func (p *Provider) SetRecords(ctx context.Context, zone string, records []libdns
 		_, ok := remoteMap[recordToSetKey]
 		if !ok {
 			payload := wedosRecordToSet
-			fmt.Println(payload)
 			request, err := p.buildRequest(ctx, AppendRecords, "AppendRecords", payload)
 			if err != nil {
 				return nil, err
@@ -199,7 +197,6 @@ func (p *Provider) SetRecords(ctx context.Context, zone string, records []libdns
 		}
 	}
 
-	fmt.Println("UPDATED RECORDS")
 	return updatedRecords, nil
 }
 
