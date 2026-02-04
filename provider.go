@@ -4,7 +4,6 @@ package wedos
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 
 	"github.com/libdns/libdns"
